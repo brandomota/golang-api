@@ -1,24 +1,9 @@
-sudo: required
+language: go
+
 services:
   - docker
 
-stages:
-  - docker-build-test
-  if: NOT branch = master
-  - docker-build-prod
-  if: branch = master
-  - docker-push-test
-  if: NOT branch = master
-  - docker-push-prod
-  if: branch = master
-
-jobs:
-  include:
-    - stage: docker-build-test
-      script: docker build -t brandomota/go-api-test .
-    - stage: docker-push-test
-      script: docker push brandomota/go-api-test
-    - stage: docker-build-prod
-      script: docker build -t brandomota/go-api-prod
-    - stage: docker-push-prod
-      script: docker push brandomota/go-api-prod
+script:
+  - go build -o /bin
+  - docker build -t $DOCKER_BUILD_TAG .
+  - docker push $DOCKER_BUILD_TAG
