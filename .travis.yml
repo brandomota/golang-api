@@ -3,7 +3,15 @@ language: go
 services:
   - docker
 
+branches:
+  only:
+  - /.*/
+
+before_script:
+  - chmod +x ./ci/*
+  - docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+
 script:
-  - go build -o /bin
-  - docker build -t $DOCKER_BUILD_TAG .
-  - docker push $DOCKER_BUILD_TAG
+  - go build
+  - if [ "$TRAVIS_BRANCH" != "master" ]; then ./ci/build-test.sh; fi
+  - if [ "$TRAVIS_BRANCH" = "master" ]; then ./ci/build-prod.sh; fi
