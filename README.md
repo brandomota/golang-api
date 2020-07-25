@@ -15,7 +15,7 @@ TO-DO (TO-DO is in progress too):
 - [ ] Routes
 - [ ] Database Support
 - [ ] Make a minimal CRUD
-- [ ] Add CI/CD in project
+- [ ] Add CI/CD in project (in progress)
 - [ ] Add Gorbot to control Sphero to play with my cat (the most important feature!)
 - [ ] Test more things with Go
 
