@@ -5,12 +5,17 @@ This is only a "my project for bored times", but you are allowed to clone and us
 
 Have a nice day (or night, is night now ? )
 
+## CRUD Configuration (in progress)
+- Define your database connection in `.env` file;
+
+
 TO-DO (TO-DO is in progress too):
 
-- [ ] Initial struture
+- [x] Initial struture
 - [ ] Routes
 - [ ] Database Support
 - [ ] Make a minimal CRUD
+- [ ] Add CI/CD in project
 - [ ] Add Gorbot to control Sphero to play with my cat (the most important feature!)
 - [ ] Test more things with Go
 
