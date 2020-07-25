@@ -13,9 +13,7 @@ import (
 
 func main() {
 
-	if os.Getenv("PROD_MODE") == "" {
-		godotenv.Load()
-	}
+	godotenv.Load()
 
 	repositories.InitDatabase()
 
