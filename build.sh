@@ -10,4 +10,4 @@ fi
 if [ "$TRAVIS_BRANCH" = "master" ]; then
     docker build -t brandomota/golang-api-prod .
     docker push brandomota/golang-api-prod
-if  
+fi  
