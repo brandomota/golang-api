@@ -16,7 +16,6 @@ TO-DO (TO-DO is in progress too):
 - [ ] Database Support
 - [ ] Make a minimal CRUD
 - [ ] Add CI/CD in project (in progress)
-- [ ] Add Gorbot to control Sphero to play with my cat (the most important feature!)
 - [ ] Test more things with Go
 
 P.S.: I love motorsports, branch names are circuit names :sweat_smile:
