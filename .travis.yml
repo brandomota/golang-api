@@ -11,4 +11,4 @@ before_script:
   - docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
 
 script:
-  - ./build.sh
+  - chmod +x ./build.sh && ./build.sh
