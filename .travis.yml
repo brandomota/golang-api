@@ -8,10 +8,7 @@ branches:
   - /.*/
 
 before_script:
-  - chmod +x ./ci/*
   - docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
 
 script:
-  - go build
-  - if [ "$TRAVIS_BRANCH" != "master" ]; then ./ci/build-test.sh; fi
-  - if [ "$TRAVIS_BRANCH" = "master" ]; then ./ci/build-prod.sh; fi
+  - chmod +x ./build.sh && ./build.sh
