@@ -5,7 +5,7 @@ import (
 	"os"
 
 	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/mysql"
+	_ "github.com/jinzhu/gorm/dialects/postgres"
 
 	"github.com/brandomota/golang-api/models"
 )
@@ -23,15 +23,15 @@ func migrateDatabase() {
 // InitDatabase : init database connection
 func InitDatabase() {
 	var err error
-	connectionString := fmt.Sprintf("%s:%s@(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local",
-		os.Getenv("MYSQL_USER"),
-		os.Getenv("MYSQL_PASSWORD"),
-		os.Getenv("MYSQL_HOST"),
-		os.Getenv("MYSQL_PORT"),
-		os.Getenv("MYSQL_DATABASE"),
+	connectionString := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s",
+		os.Getenv("POSTGRES_HOST"),
+		os.Getenv("POSTGRES_PORT"),
+		os.Getenv("POSTGRES_USER"),
+		os.Getenv("POSTGRES_DATABASE"),
+		os.Getenv("POSTGRES_PASSWORD"),
 	)
 
-	DBCon, err = gorm.Open("mysql", connectionString)
+	DBCon, err = gorm.Open("postgres", connectionString)
 	if err != nil {
 		panic(fmt.Sprintf("failed to connect database: %s ", err.Error()))
 	}
