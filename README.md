@@ -1,4 +1,4 @@
-# golang-api
+# golang-api [![Build Status](https://travis-ci.com/brandomota/golang-api.svg?branch=master)](https://travis-ci.com/brandomota/golang-api)
 REST API in Golang using [Fiber](https://github.com/gofiber/fiber) and some others libs.
 
 This is only a "my project for bored times", but you are allowed to clone and use, send PR, suggest any change (i started this project to learn Go too),etc.
