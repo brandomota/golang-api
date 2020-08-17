@@ -6,12 +6,19 @@ import (
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+
+	"github.com/brandomota/golang-api/models"
 )
 
 var (
 	// DBCon : Database connection
 	DBCon *gorm.DB
 )
+
+func migrateDatabase() {
+	// Add new models on creation
+	DBCon.AutoMigrate(models.User{})
+}
 
 // InitDatabase : init database connection
 func InitDatabase() {
@@ -28,5 +35,8 @@ func InitDatabase() {
 	if err != nil {
 		panic(fmt.Sprintf("failed to connect database: %s ", err.Error()))
 	}
+
+	migrateDatabase()
+
 	defer DBCon.Close()
 }

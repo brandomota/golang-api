@@ -8,8 +8,8 @@ import (
 
 type User struct {
 	gorm.Model
-	name     string `gorm:"type:varchar(100);unique_index"`
-	email    string `gorm:"type:varchar(100);unique_index"`
-	age      sql.NullInt64
-	userType int64
+	Name     string `gorm:"type:varchar(100);unique_index;not null"`
+	Email    string `gorm:"type:varchar(100);unique_index;not null"`
+	Age      sql.NullInt64
+	UserType int64
 }
