@@ -15,21 +15,21 @@ func GetUserById(id int64) models.User {
 	return user
 }
 
-func CreateUser(newUser models.User) error {
+func CreateUser(newUser *models.User) error {
 	var err error
 	err = DBCon.Create(&newUser).Error
 
 	return err
 }
 
-func UpdateUser(user models.User) error {
+func UpdateUser(user *models.User) error {
 	var err error
 	err = DBCon.Save(&user).Error
 
 	return err
 }
 
-func DeleteUser(user models.User) error {
+func DeleteUser(user *models.User) error {
 	var err error
 	err = DBCon.Unscoped().Delete(&user).Error
 
