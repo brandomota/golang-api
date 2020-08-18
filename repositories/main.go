@@ -40,5 +40,4 @@ func InitDatabase() {
 
 	migrateDatabase()
 
-	defer DBCon.Close()
 }

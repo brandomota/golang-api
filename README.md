@@ -16,7 +16,7 @@ TO-DO (TO-DO is in progress too):
 - [x] Database Support
 - [x] Make a minimal CRUD
 - [x] Add CI/CD in project
-- [ ] Configure Heroku deploy
+- [x] Configure Heroku deploy
 - [ ] Test more things with Go
 
 P.S.: I love motorsports, branch names are circuit names :sweat_smile:
