@@ -103,7 +103,7 @@ func UpdateUser(context *fiber.Ctx) {
 
 	saveErr := repository.UpdateUser(&user)
 
-	if saveErr == nil {
+	if saveErr != nil {
 		log.Printf("error on update user: %s", err.Error())
 		context.Status(400).JSON(&fiber.Map{"error": saveErr.Error()})
 	} else {
