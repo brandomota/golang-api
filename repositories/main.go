@@ -2,6 +2,7 @@ package repositories
 
 import (
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/jinzhu/gorm"
@@ -33,6 +34,7 @@ func InitDatabase() {
 
 	DBCon, err = gorm.Open("postgres", connectionString)
 	if err != nil {
+		log.Printf("failed to connect database: %s ", err.Error())
 		panic(fmt.Sprintf("failed to connect database: %s ", err.Error()))
 	}
 
