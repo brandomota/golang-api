@@ -5,8 +5,8 @@ services:
 
 branches:
   only:
-  - /.*/
-
+  - master
+  
 before_script:
   - docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
 
