@@ -23,7 +23,7 @@ func main() {
 
 	routes.SetRoutes(server)
 
-	port := os.Getenv("SERVER_PORT")
+	port := os.Getenv("PORT")
 
 	server.Listen(port)
 }

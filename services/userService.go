@@ -1,6 +1,7 @@
 package services
 
 import (
+	"log"
 	"strconv"
 
 	"github.com/gofiber/fiber"
@@ -15,6 +16,7 @@ func GetAllUsers(context *fiber.Ctx) {
 	var users = repository.GetAllUsers()
 
 	if users == nil {
+		log.Printf("database is empty")
 		context.Status(404).JSON(&fiber.Map{"response": "not found"})
 	} else {
 		context.Status(200).JSON(users)
@@ -26,12 +28,14 @@ func GetUserById(context *fiber.Ctx) {
 	id, err := strconv.ParseInt(context.Params("id"), 0, 36)
 
 	if err != nil {
+		log.Printf("error on parse ID: %s", err.Error())
 		context.Status(400).JSON(&fiber.Map{"error": err.Error()})
 	}
 
 	var user = repository.GetUserById(id)
 
 	if user.ID == 0 {
+		log.Printf("user not found: %d", id)
 		context.Status(404).JSON(&fiber.Map{"response": "not found"})
 	} else {
 		context.Status(200).JSON(user)
@@ -44,6 +48,7 @@ func CreateUser(context *fiber.Ctx) {
 	var newUser models.User
 
 	if err := context.BodyParser(userDto); err != nil {
+		log.Printf("error on body parse: %s", err.Error())
 		context.Status(400).JSON(&fiber.Map{"error": err.Error()})
 	}
 
@@ -55,6 +60,7 @@ func CreateUser(context *fiber.Ctx) {
 	err = repository.CreateUser(newUser)
 
 	if err != nil {
+		log.Printf("error on create new user: %s", err.Error())
 		context.Status(400).JSON(&fiber.Map{"error": err.Error()})
 	} else {
 		context.Status(201).JSON(newUser)
@@ -68,16 +74,19 @@ func UpdateUser(context *fiber.Ctx) {
 	id, err := strconv.ParseInt(context.Params("id"), 0, 36)
 
 	if err != nil {
+		log.Printf("error on parse ID: %s", err.Error())
 		context.Status(400).JSON(&fiber.Map{"error": err.Error()})
 	}
 
 	user := repository.GetUserById(id)
 
 	if user.ID == 0 {
+		log.Printf("user not found: %d", id)
 		context.Status(404).JSON(&fiber.Map{"response": "not found"})
 	}
 
 	if err := context.BodyParser(userData); err != nil {
+		log.Printf("error on body parse: %s", err.Error())
 		context.Status(400).JSON(&fiber.Map{"error": err.Error()})
 	}
 
@@ -89,6 +98,7 @@ func UpdateUser(context *fiber.Ctx) {
 	saveErr := repository.UpdateUser(user)
 
 	if saveErr == nil {
+		log.Printf("error on update user: %s", err.Error())
 		context.Status(400).JSON(&fiber.Map{"error": saveErr.Error()})
 	}
 
@@ -101,18 +111,21 @@ func DeleteUser(context *fiber.Ctx) {
 	id, err := strconv.ParseInt(context.Params("id"), 0, 36)
 
 	if err != nil {
+		log.Printf("error on parse ID: %s", err.Error())
 		context.Status(400).JSON(&fiber.Map{"error": err.Error()})
 	}
 
 	var user = repository.GetUserById(id)
 
 	if user.ID == 0 {
+		log.Printf("user not found: %d", id)
 		context.Status(404).JSON(&fiber.Map{"response": "not found"})
 	}
 
 	dbErr := repository.DeleteUser(user)
 
 	if dbErr != nil {
+		log.Printf("error on delete user: %s", dbErr.Error())
 		context.Status(400).JSON(&fiber.Map{"error": dbErr.Error()})
 	} else {
 		context.Status(204).Send()
