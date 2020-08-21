@@ -1,6 +1,9 @@
 package routes
 
-import "github.com/gofiber/fiber"
+import (
+	"github.com/brandomota/golang-api/services"
+	"github.com/gofiber/fiber"
+)
 
 func SetProductRoutes(group fiber.Router) {
 	group.Get("/", services.GetAllProducts)
