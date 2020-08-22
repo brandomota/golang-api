@@ -50,11 +50,13 @@ func CreateProduct(context *fiber.Ctx) {
 	if err := context.BodyParser(productDto); err != nil {
 		log.Printf("error on body parse: %s", err.Error())
 		context.Status(400).JSON(&fiber.Map{"error": err.Error()})
+		return
 	}
 
 	if err := validator.Validate(productDto); err != nil {
-		log.Printf("error on body parse: %s", err.Error())
+		log.Printf("error on body validation: %s", err.Error())
 		context.Status(400).JSON(&fiber.Map{"error": err.Error()})
+		return
 	}
 
 	newProduct.Description = productDto.Description
@@ -79,6 +81,13 @@ func UpdateProduct(context *fiber.Ctx)  {
 	if err := context.BodyParser(productDto); err != nil {
 		log.Printf("error on body parse: %s", err.Error())
 		context.Status(400).JSON(&fiber.Map{"error": err.Error()})
+		return
+	}
+
+	if err := validator.Validate(productDto); err != nil {
+		log.Printf("error on body validation: %s", err.Error())
+		context.Status(400).JSON(&fiber.Map{"error": err.Error()})
+		return
 	}
 
 	id, err := strconv.ParseInt(context.Params("id"), 0, 36)
@@ -133,7 +142,10 @@ func DeleteProduct(context *fiber.Ctx)  {
 	err = repository.DeleteProduct(&product)
 
 	if err != nil {
-
+		log.Printf("error on delete product: %s", err.Error())
+		context.Status(400).JSON(&fiber.Map{"error": err.Error()})
+	} else {
+		context.Status(204).Send()
 	}
 
 }

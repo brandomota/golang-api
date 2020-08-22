@@ -1,6 +1,7 @@
 package services
 
 import (
+	"gopkg.in/validator.v2"
 	"log"
 	"strconv"
 
@@ -49,8 +50,14 @@ func CreateUser(context *fiber.Ctx) {
 	var err error
 	var newUser models.User
 
-	if err := context.BodyParser(userDto); err != nil {
+	if err = context.BodyParser(userDto); err != nil {
 		log.Printf("error on body parse: %s", err.Error())
+		context.Status(400).JSON(&fiber.Map{"error": err.Error()})
+		return
+	}
+
+	if err = validator.Validate(userDto); err != nil {
+		log.Printf("error on body validation: %s", err.Error())
 		context.Status(400).JSON(&fiber.Map{"error": err.Error()})
 		return
 	}
@@ -92,6 +99,12 @@ func UpdateUser(context *fiber.Ctx) {
 
 	if err := context.BodyParser(userData); err != nil {
 		log.Printf("error on body parse: %s", err.Error())
+		context.Status(400).JSON(&fiber.Map{"error": err.Error()})
+		return
+	}
+
+	if err = validator.Validate(userData); err != nil {
+		log.Printf("error on body validation: %s", err.Error())
 		context.Status(400).JSON(&fiber.Map{"error": err.Error()})
 		return
 	}
