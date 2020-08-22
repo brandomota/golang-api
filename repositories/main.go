@@ -19,6 +19,7 @@ var (
 func migrateDatabase() {
 	// Add new models on creation
 	DBCon.AutoMigrate(models.User{})
+	DBCon.AutoMigrate(models.Product{})
 }
 
 // InitDatabase : init database connection

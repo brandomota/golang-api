@@ -1,6 +1,7 @@
 package services
 
 import (
+	"gopkg.in/validator.v2"
 	"log"
 	"strconv"
 
@@ -49,8 +50,14 @@ func CreateUser(context *fiber.Ctx) {
 	var err error
 	var newUser models.User
 
-	if err := context.BodyParser(userDto); err != nil {
+	if err = context.BodyParser(userDto); err != nil {
 		log.Printf("error on body parse: %s", err.Error())
+		context.Status(400).JSON(&fiber.Map{"error": err.Error()})
+		return
+	}
+
+	if err = validator.Validate(userDto); err != nil {
+		log.Printf("error on body validation: %s", err.Error())
 		context.Status(400).JSON(&fiber.Map{"error": err.Error()})
 		return
 	}
@@ -96,6 +103,12 @@ func UpdateUser(context *fiber.Ctx) {
 		return
 	}
 
+	if err = validator.Validate(userData); err != nil {
+		log.Printf("error on body validation: %s", err.Error())
+		context.Status(400).JSON(&fiber.Map{"error": err.Error()})
+		return
+	}
+
 	user.Name = userData.Name
 	user.Age = userData.Age
 	user.Email = userData.Email
@@ -104,7 +117,7 @@ func UpdateUser(context *fiber.Ctx) {
 	saveErr := repository.UpdateUser(&user)
 
 	if saveErr != nil {
-		log.Printf("error on update user: %s", err.Error())
+		log.Printf("error on update user: %s", saveErr.Error())
 		context.Status(400).JSON(&fiber.Map{"error": saveErr.Error()})
 	} else {
 		context.Status(200).JSON(user)

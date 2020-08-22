@@ -7,4 +7,5 @@ import (
 // SetRoutes define router groups and init all routes
 func SetRoutes(server *fiber.App) {
 	SetUserRoutes(server.Group("/users"))
+	SetProductRoutes(server.Group("/products"))
 }
