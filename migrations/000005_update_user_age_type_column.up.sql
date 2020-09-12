@@ -1,0 +1,3 @@
+ALTER TABLE public.users ALTER COLUMN age SET NOT NULL;
+ALTER TABLE public.users ALTER COLUMN user_type SET NOT NULL;
+
