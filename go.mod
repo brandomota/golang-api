@@ -9,4 +9,5 @@ require (
 	github.com/jinzhu/gorm v1.9.15
 	github.com/joho/godotenv v1.3.0
 	gopkg.in/validator.v2 v2.0.0-20200605151824-2b28d334fa05
+	mvdan.cc/unparam v0.0.0-20200501210554-b37ab49443f7 // indirect
 )
