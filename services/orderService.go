@@ -1,39 +1,36 @@
 package services
 
 import (
-	"log"
-	"strconv"
-
 	repository "github.com/brandomota/golang-api/repositories"
-	"github.com/gofiber/fiber"
+	"github.com/gofiber/fiber/v2"
+	"log"
 )
 
-func GetAllOrders(context *fiber.Ctx) {
+func GetAllOrders(context *fiber.Ctx) error {
 	var orders = repository.GetAllOrders()
 
 	if orders == nil {
 		log.Print("database is empty")
-		context.Status(404).JSON(&fiber.Map{"response": "not found"})
+		return context.Status(404).JSON(&fiber.Map{"response": "not found"})
 
 	} else {
-		context.Status(200).JSON(orders)
+		return context.Status(200).JSON(orders)
 	}
 }
 
-func GetOrderById(context *fiber.Ctx) {
-	id, err := strconv.ParseInt(context.Params("id"), 0, 36)
+func GetOrderById(context *fiber.Ctx) error {
+	id, err := ParseId(context)
+
 	if err != nil {
-		log.Printf("error on parse ID: %s", err.Error())
-		context.Status(400).JSON(&fiber.Map{"error": err.Error()})
-		return
+		return context.Status(400).JSON(&fiber.Map{"error": err.Error()})
 	}
 
 	var order = repository.GetOrderById(id)
 
 	if order.ID == 0 {
 		log.Printf("order not found : %d", id)
-		context.Status(404).JSON(&fiber.Map{"response": "not found"})
+		return context.Status(404).JSON(&fiber.Map{"response": "not found"})
 	} else {
-		context.Status(200).JSON(order)
+		return context.Status(200).JSON(order)
 	}
 }

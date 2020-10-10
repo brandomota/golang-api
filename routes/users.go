@@ -2,7 +2,7 @@ package routes
 
 import (
 	"github.com/brandomota/golang-api/services"
-	"github.com/gofiber/fiber"
+	"github.com/gofiber/fiber/v2"
 )
 
 // SetUserRoutes init all routes for Group **User**
