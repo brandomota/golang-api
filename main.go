@@ -1,14 +1,12 @@
 package main
 
 import (
-	"os"
-
 	"github.com/brandomota/golang-api/repositories"
 	"github.com/brandomota/golang-api/routes"
+	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/joho/godotenv"
 
-	"github.com/gofiber/fiber"
-	"github.com/gofiber/fiber/middleware"
+	"github.com/gofiber/fiber/v2"
 )
 
 func main() {
@@ -19,11 +17,11 @@ func main() {
 
 	server := fiber.New()
 
-	server.Use(middleware.Logger())
+	server.Use(logger.New())
 
 	routes.SetRoutes(server)
 
-	port := os.Getenv("PORT")
+	//port := os.Getenv("PORT")
 
-	server.Listen(port)
+	server.Listen(":3000")
 }

@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"github.com/gofiber/fiber"
+	"github.com/gofiber/fiber/v2"
 )
 
 // SetRoutes define router groups and init all routes
