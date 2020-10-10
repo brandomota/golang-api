@@ -26,7 +26,7 @@ func GetProductById(context *fiber.Ctx) {
 	id, err := strconv.ParseInt(context.Params("id"), 0, 36)
 
 	if err != nil {
-		log.Print("error on parse ID: %s", err.Error())
+		log.Printf("error on parse ID: %s", err.Error())
 		context.Status(400).JSON(&fiber.Map{"error": err.Error()})
 		return
 	}
