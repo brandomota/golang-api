@@ -1,5 +1,6 @@
 module github.com/brandomota/golang-api
 
+// +heroku goVersion 1.14
 go 1.14
 
 require (
