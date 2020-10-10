@@ -8,4 +8,5 @@ import (
 func SetRoutes(server *fiber.App) {
 	SetUserRoutes(server.Group("/users"))
 	SetProductRoutes(server.Group("/products"))
+	SetOrderRoutes(server.Group("/orders"))
 }

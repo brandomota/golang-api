@@ -1,13 +1,14 @@
 package services
 
 import (
+	"log"
+	"strconv"
+
 	"github.com/brandomota/golang-api/DTOs"
 	"github.com/brandomota/golang-api/models"
 	repository "github.com/brandomota/golang-api/repositories"
 	"github.com/gofiber/fiber"
 	"gopkg.in/validator.v2"
-	"log"
-	"strconv"
 )
 
 func GetAllProducts(context *fiber.Ctx) {
@@ -25,7 +26,7 @@ func GetProductById(context *fiber.Ctx) {
 	id, err := strconv.ParseInt(context.Params("id"), 0, 36)
 
 	if err != nil {
-		log.Print("error on parse ID: %s", err.Error())
+		log.Printf("error on parse ID: %s", err.Error())
 		context.Status(400).JSON(&fiber.Map{"error": err.Error()})
 		return
 	}
@@ -38,7 +39,6 @@ func GetProductById(context *fiber.Ctx) {
 	} else {
 		context.Status(200).JSON(product)
 	}
-
 
 }
 
@@ -74,7 +74,7 @@ func CreateProduct(context *fiber.Ctx) {
 	}
 }
 
-func UpdateProduct(context *fiber.Ctx)  {
+func UpdateProduct(context *fiber.Ctx) {
 	productDto := new(DTOs.ProductDto)
 	var err error
 
@@ -122,7 +122,7 @@ func UpdateProduct(context *fiber.Ctx)  {
 
 }
 
-func DeleteProduct(context *fiber.Ctx)  {
+func DeleteProduct(context *fiber.Ctx) {
 	id, err := strconv.ParseInt(context.Params("id"), 0, 36)
 
 	if err != nil {
