@@ -34,3 +34,18 @@ func GetOrderById(context *fiber.Ctx) error {
 		return context.Status(200).JSON(order)
 	}
 }
+
+func GetByUserId(context *fiber.Ctx) error {
+	id, err := ParseId(context)
+
+	if err != nil {
+		return context.Status(400).JSON(&fiber.Map{"error": err.Error()})
+	}
+	var orders = repository.GetOrdersByUserId(id)
+	if len(orders) == 0 {
+		log.Printf("no orders found")
+		return context.Status(404).JSON(&fiber.Map{"response": "not found"})
+	} else {
+		return context.Status(200).JSON(orders)
+	}
+}

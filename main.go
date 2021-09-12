@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+
 	"github.com/brandomota/golang-api/repositories"
 	"github.com/brandomota/golang-api/routes"
 	"github.com/gofiber/fiber/v2/middleware/logger"
@@ -21,7 +23,7 @@ func main() {
 
 	routes.SetRoutes(server)
 
-	//port := os.Getenv("PORT")
+	port := os.Getenv("PORT")
 
-	server.Listen(":3000")
+	server.Listen(":" + port)
 }

@@ -8,7 +8,7 @@ import (
 func SetOrderRoutes(group fiber.Router) {
 	group.Get("/", services.GetAllOrders)
 	group.Get("/:id", services.GetOrderById)
-	// group.Get("/byUser/:id", services.GetByUserId) Added in next branch
-	//group.Post("/", services.CreateOrder)
-	//group.Post("/:id/status", services.UpdateStatus)
+	group.Get("/byUser/:id", services.GetByUserId)
+	// group.Post("/", services.CreateOrder)
+	// group.Post("/:id/status", services.UpdateStatus)
 }
